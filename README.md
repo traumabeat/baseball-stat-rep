@@ -1,2 +1,2 @@
-# my-first-rep
-Analysis
+# first-baseball-rep
+Cleaning and Analyzing MLB PLayer Data
