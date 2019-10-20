@@ -118,14 +118,6 @@ jt_5y['Encoded_Location'] = jt_5y['Location'].map({ 'Home': 1 , 'Away': 0 })
 # In[14]:
 
 
-# Missing data, 1 means average pressure
-jt_5y.at[28,'aLI'] = 1
-jt_5y.at[535,'aLI'] = 1
-
-
-# In[17]:
-
-
 sns.boxplot(x = jt_5y.sort_values('BA')['Opp'], y = jt_5y.sort_values('BA')['BA']);
 plt.rcParams['figure.figsize']=(10,10);
 sns.set(font_scale= 1);
@@ -145,7 +137,7 @@ plt.xticks(rotation = 45);
 
 # Define our features/target
 X = jt_5y[['PA','AB','R','H','2B','RBI', 'Encoded_Location','HR']]
-# Target data['target'] = 0 is malignant 1 is benign
+# Target data['target'] = 0 is LOSS 1 is WIN
 Y = (jt_5y['Outcome'] == 1).values
 
 
@@ -166,8 +158,9 @@ print(f"Test Data Size: {len(x_test)}")
 lr = sklearn.linear_model.LogisticRegression(fit_intercept=True)
 
 lr.fit(x_train,y_train) # SOLUTION
-train_accuracy = sum(lr.predict(x_train) == y_train) / len(y_train) # SOLUTION
-test_accuracy = sum(lr.predict(x_test) == y_test) / len(y_test) # SOLUTION
+train_accuracy = sum(lr.predict(x_train) == y_train) / len(y_train)
+test_accuracy = sum(lr.predict(x_test) == y_test) / len(y_test)
 
+# Prints the accurancy of the model on the training and test set
 print(f"Train accuracy: {train_accuracy:.6f}")
 print(f"Test accuracy: {test_accuracy:.6f}")
